@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>
+            DOM Manipulation
+        </title>
+        <style>
+            body{
+         font-family:arial,sans-serif;
+         line-height:1.6;
+         margin:20px;
+
+            }
+            ul{
+                padding:0;
+             list-style-type: none;
+
+            }
+            li {
+                margin: 5px 0;
+            }
+        </style>
+       
+    </head>
+    <body>
+        <h1 id="main-heading">simple heading text</h1>
+        <p class ="description">this is a normal paragraph tag of html </p>
+        <ul>
+            <li>rohit shrama</li>
+             <li>virat kohli</li>
+              <li>jasprit bumrah</li>
+
+        </ul>
+        <button onclick="action()">CLICK Me!</button>
+        <script>
+            function action() {
+                const heading =document.getElementById("main-heading");
+                if(heading){
+                    heading.textContent="heading updated by JS";
+                    heading.style.color="blue";
+                    heading.style.fontSize="2em";
+                }
+                const firstparagraph =document.querySelector(".description");
+                if (firstparagraph) {
+                    firstparagraph.textContent="Now, the paragraph is updated BY JS";
+                    firstparagraph.style.backgroundcolor="#fff0987";
+                }
+                const listitems=document.querySelectorAll ("ul li");
+                 listitems.forEach((item,index)=>{
+                    item.textContent=`player${index+1}`;
+                    item.style.fontWeight="bold";
+                });
+                const newDiv=document.createElement("div");
+                newDiv.textContent="this is a new dynamically created div";
+                newDiv.style.padding="10px";
+                newDiv.style.border="1px solid #ccc";
+                const body=document.body;
+                body.appendChild(newDiv);
+                const button=document.querySelector("button");
+                if(button){
+                    button.addEventListener("click",()=>{
+                        alert("button was clicked!");
+                    } );
+                }
+
+            }
+
+        </script>
+    </body>
+</html>

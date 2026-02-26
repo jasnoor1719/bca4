@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DYNAMIC DOM Manipulation</title>
+
+    <style>
+        #container {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid black;
+            background-color: palevioletred;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            
+             background-color: whitesmoke;
+        }
+        button, input {
+            margin: 10px 0;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="container">
+    <h1>DYNAMIC ELEMENT MANIPULATION</h1>
+</div>
+
+<script>
+    function createListItem(parentId, textContent) {
+        const li = document.createElement('li');
+        li.textContent = textContent;
+
+        const parent = document.getElementById(parentId);
+        if (parent) {
+            parent.appendChild(li);
+        } else {
+            console.error('Parent element not found');
+        }
+    }
+
+    function createButton(parentId, buttonText, onClickFunction) {
+        const button = document.createElement('button');
+        button.textContent = buttonText;
+        button.addEventListener('click', onClickFunction);
+
+        const parent = document.getElementById(parentId);
+        if (parent) {
+            parent.appendChild(button);
+        } else {
+            console.error('Parent element not found');
+        }
+    }
+
+    function createInput(parentId, placeholderText, onChangeFunction) {
+        const input = document.createElement('input');
+        input.placeholder = placeholderText;
+        input.addEventListener('input', (event) => {
+            onChangeFunction(event.target.value);
+        });
+
+        const parent = document.getElementById(parentId);
+        if (parent) {
+            parent.appendChild(input);
+        } else {
+            console.error('Parent element not found');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const parentId = 'container';
+
+        const ul = document.createElement('ul');
+        ul.id = 'dynamicList';
+        document.getElementById(parentId).appendChild(ul);
+
+        createListItem('dynamicList', 'JASNOOR KAUR 2410997165');
+
+        createButton(parentId, 'Click Me', () => {
+            alert('Button clicked!
+            ');
+        });
+
+        createInput(parentId, 'Type something...', (value) => {
+            console.log('Input changed:', value);
+        });
+
+        createButton(parentId, 'Add List Item', () => {
+            const newItemText = prompt('Enter new item text');
+            if (newItemText) {
+                createListItem('dynamicList', newItemText);
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

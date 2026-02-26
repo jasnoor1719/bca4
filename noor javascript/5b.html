@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Fetch Data with Ajax</h1>
+
+    <button id="FetchButton">Fetch Data</button><br><br>
+
+    <div id="data">Click the button to fetch data.</div>
+
+    <script>
+        document.getElementById('FetchButton').addEventListener('click', function () {
+            const xmlreq = new XMLHttpRequest();
+            const url = 'https://jsonplaceholder.typicode.com/posts/3';
+
+            document.getElementById('data').textContent = 'Loading.....';
+
+            xmlreq.open('GET', url, true);
+
+            xmlreq.onload = function () {
+                if (xmlreq.status === 200) {
+                    const response = JSON.parse(xmlreq.responseText);
+                    document.getElementById('data').innerHTML = `
+                        <h2>${response.title}</h2>
+                        <p>${response.body}</p>
+                    `;
+                } else {
+                    document.getElementById('data').textContent = 'Failed to fetch data.';
+                }
+            };
+
+            xmlreq.onerror = function () {
+                document.getElementById('data').textContent = 'Error occurred while fetching.';
+            };
+
+            xmlreq.send();
+        });
+    </script>
+</body>
+</html>
